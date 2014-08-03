@@ -1,0 +1,75 @@
+#
+# JAD File
+#
+MIDlet-Name=Xfolite
+MIDlet-Description=XForms selain
+
+#
+# Texts 
+#
+main.cmd.open=Avaa
+main.cmd.about=Tietoja
+main.cmd.exit=Poistu
+main.cmd.back=Takaisin
+main.cmd.close=Sulje
+main.label.defaultTitle=XForms
+main.label.loading=Ladataan...
+main.label.about=Xfolite
+main.msg.about=Käännöserä: {0}\n\nXfolite on avoimen lähdekoodin toteutus W3C XForms spesifikaatiosta.\nXfolite on lisensoitu LPGL-lisenssillä.\n\nLisätietoja saat osoitteesta\nhttp://www.xfolite.org.
+forms.label.buildingTabs=Muodostan välilehtiä...
+forms.msg.pleaseWait=Odota...
+forms.error.noStartAndEnd=Sekä \"start\" että \"end\" attribuutit täytyy määritellä range elementille!
+forms.error.couldNotParseStartAttribute=Start attribuutti muotoiltu väärin
+forms.error.couldNotParseEndAttribute=End attribuutti muotoiltu väärin
+forms.error.rangeSupportsOnlyDecimalAndInteger=Range tukee vain decimal- ja integer-tyyppejä
+forms.error.illegalValueForRangeInInstanceData=Illegal value for range in instance data
+forms.error.imageNotFound=Kuvaa ei löytynyt
+forms.error.noDataTypeFound=Tietotyyppiä ei löytynyt!
+forms.error.cannotResolveDataType=Tietotyyppiä ei pystytty selvittämään!
+forms.error.cannotResolveSelectItems=Select vaihtoehtoja ei pystytty selvittämään
+forms.error.evenRowStyleNotDefined=Taulukoiden parillisten rivien tyyliä ei ole määritelty!
+forms.error.oddRowStyleNotDefined=Taulukoiden parittomien rivien tyyliä ei ole määritelty!
+forms.error.dateFieldHasIncompatibleType=Päivämääräkentän tyyppi ei ole yhteensopiva!
+forms.error.dateFieldSupportsOnly=Päivämääräkenttä tukee vain tyyppejä date, time ja datetime!
+forms.error.wrongElementForRebuild=Väärä elementti rebuild-eventille!
+forms.error.generalUiFailure=XForms käyttöliittymävirhe!
+forms.error.errorWhileLoadingForm=Virhe kaavaketta ladattaessa
+forms.error.errorAt=Virhe paikassa
+forms.error.errorWhenHandlingUserInput=Virhe käsiteltäessä käyttäjän syötettä
+forms.error.noMatchingSelectItem=Vastaavaa select vaihtoehtoa ei löytynyt
+forms.error.initializationError=Virhe alustamisen yhteydessä
+forms.error.unableToSetLabelForClass=Luokalle ei voi asettaa nimeä
+forms.error.resetNotImplemented=Reset-toimintoa ei ole toteutettu!
+forms.error.unableToSetSelectValue=Select arvoa ei voitu asettaa
+forms.error.unableToSetValueForClass=Luokalle ei voi asettaa arvoa
+forms.cmd.submit=Lähetä
+forms.cmd.memory=Muisti
+forms.label.message=Viesti
+forms.label.loadError=Latausvirhe
+forms.label.processing=Käsittelee...
+forms.msg.freeMemory=Muisti: {0} vapaana, {1} kaiken kaikkiaan.
+
+#
+# J2ME Polish UI localization
+#
+polish.command.ok=OK
+polish.command.cancel=Peruuta
+polish.command.select=Valitse
+polish.command.mark=Mukaan
+polish.command.unmark=Poista
+polish.command.options=Valinnat
+# for deleting a single char:
+polish.command.delete=Poista
+# for deleting a complete TextField:
+polish.command.clear=Tyhjennä
+# for hiding menus on BlackBerry devices:
+polish.command.hide=Piilota
+# for showing a default title when no label
+# is defined in a TextField. This is only
+# used when no direct input mode is activated:
+polish.title.input=Syöte
+# used for showing a screen for selecting symbols within TextFields:
+polish.command.entersymbol=Merkit
+
+
+

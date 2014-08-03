@@ -1,0 +1,120 @@
+Note: This is a straight export from a local copy of the now
+offline Nokia SVN repo that housed the Xfolite project.
+Although J2ME Polish is still available, the project might
+not build with the latest version (2.4). You can find older
+versions from http://sourceforge.net/projects/polish.berlios/files/
+
+-----------------
+Xfolite is a light-weight XForms client for the J2ME platform.
+It includes a DOM and XPath 1.0 implementation as well as an
+XForms engine that implements the XForms 1.1 specification
+almost completely. XML Schemas are not supported.
+
+To compile the code, you need to install J2ME Polish
+(http://www.j2mepolish.org/, tested with version 2.1.4) and
+Apache Ant (http://ant.apache.org/, tested with version 1.8.0).
+The build command is "ant j2mepolish" to make a release build
+and "ant test j2mepolish" to make a debug build. "ant clean"
+will remove files created by the two previous commands.
+See J2ME Polish documentation for more information on the
+build process.
+
+This is a research prototype, and the code maturity level
+varies by component. The DOM and XPath 1.0 implementation
+and the XForms engine are fairly mature, whereas the user
+interface binding  (com.nokia.xfolite.client,
+com.nokia.xfolite.client.ui) is beta level at best - suitable
+for research and limited user trials, but production use
+would require more work, both for adding missing features
+and for making existing features more robust.
+
+The package structure is as follows:
+
+com.nokia.xfolite.client
+  Client midlet and UI factory and controller that bind the XForms engine to a J2ME Polish based UI.
+
+com.nokia.xfolite.client.ui
+  UI widgets used by the client midlet.
+
+com.nokia.xfolite.client.util
+  Helper classes
+
+com.nokia.xfolite.xforms.dom
+  XForms specific DOM element classes
+
+com.nokia.xfolite.xforms.model
+  XForms calculation engine
+
+com.nokia.xfolite.xforms.model.datasource
+  Support for using sensors from XForms (not used at the moment)
+
+com.nokia.xfolite.xforms.model.datatypes
+  Support for the most important XML Schema datatypes used by XForms
+
+com.nokia.xfolite.xforms.submission
+  Submission formats and serialization
+
+com.nokia.xfolite.xforms.xpath
+  XForms-specific XPath functions
+
+com.nokia.xfolite.xml.dom
+  Basic DOM implementation
+
+com.nokia.xfolite.xml.dom.events
+  DOM events
+
+com.nokia.xfolite.xml.xpath
+  XPath 1.0
+
+org.bouncycastle.crypto
+org.bouncycastle.crypto.digests
+org.bouncycastle.util.encoders
+  Bouncy Castle cryptographic digests
+
+org.kxml2.io
+  KXML2 XML parser
+
+org.xmlpull.v1
+  XmlPull interface
+
+
+
+The parts created by Nokia are licensed under the terms of the GNU Lesser
+General Public License as published by the Free Software Foundation;
+either version 2.1 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU Lesser General Public License (LICENSE-LGPL-2.1)
+for more details.
+
+The software uses the following third-party (non-Nokia) open-source
+components:
+
+XmlPull interface (http://www.xmlpull.org/).
+  See LICENSE-XMLPULL.
+  
+KXML2 XML parser (http://kxml.sourceforge.net/kxml2/).
+  See LICENSE-KXML.
+
+Bouncy Castle cryptographic digests (http://www.bouncycastle.org/).
+  See LICENSE-BOUNCYCASTLE.
+
+W3C DOMException and XPathException classes (http://www.w3.org/).
+  See LICENSE-W3C.
+
+KXML2 uses BSD license according to its website. XmlPull is in public domain.
+Bouncy Castle license is an adaptation of the MIT/X11 license.
+According to http://www.gnu.org/licenses/license-list.html#GPLCompatibleLicenses,
+this means that all the licenses (including the W3C license
+and the LGPL license) should be GPL-compatible.
+Therefore, you should be able to use the (free) GPL-licensed version
+of J2ME Polish, as long as you publish your source code under GPL.
+Alternatively, if you do not wish to publish your source code,
+you should be able to use the commercial version of J2ME Polish
+and the original licenses.
+
+However, although Enough Software (developer of J2ME Polish) has confirmed
+that the above arrangement is acceptable to them,
+THE PREVIOUS PARAGRAPH IS SPECULATION.
+IT IS NEITHER LEGAL ADVICE NOR ANY KIND OF GUARANTEE OR COMMITMENT.

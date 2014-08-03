@@ -1,0 +1,72 @@
+<!--
+	custom-css-attributes.xml can define the CSS attributes of your
+	own CustomItems. 
+	
+	Each attribute can have following attributes:
+	name (required): the name of the attribute, e.g. "icon-image".
+	description (optional): the description of the attribute.
+	type (optional): the type of the attribute, either "string", "integer",
+					 "color", "boolean" or "style". Defaults to "string".
+	appliesTo (optional): A comma-separated list of classes for which the attribute can
+				      be used, e.g. "MyCustomItem".
+	default (optional): The default-value of the attribute.
+	value (optional): All allowed values in a comma-separated list.
+
+-->
+<attributes>
+	<attribute
+		name="tabitem-left-arrow"
+		type="imageurl"
+		appliesTo="TabItem"
+		description="Left arrow icon for tabitem"
+	/>
+	<attribute
+		name="tabitem-right-arrow"
+		type="imageurl"
+		appliesTo="TabItem"
+		description="Right arrow icon for tabitem"
+	/>
+	<attribute
+		name="tabitem-roundtrip"
+		type="boolean"
+		appliesTo="TabItem"
+		description="Is the tab navigation wrap-around?"
+		default="false"
+	/>
+	<attribute
+		name="tabitem-activestyle"
+		type="style"
+		appliesTo="TabItem"
+		description="Style for the active tab"
+	/>
+	<attribute
+		name="tabitem-inactivestyle"
+		type="style"
+		appliesTo="TabItem"
+		description="Style for the inactive tab"
+	/>
+	<attribute
+		name="tabitem-scrolling-indicator-color"
+		type="color"
+		appliesTo="TabItem"
+		description="Scrolling indicator color"
+	/>
+  <attribute
+		name="tabitem-arrow-y-offset"
+		type="integer"
+		appliesTo="TabItem"
+		description="Arrow Y offset"
+	/>
+  <attribute
+		name="tabitem-arrow-x-offset"
+		type="integer"
+		appliesTo="TabItem"
+		description="Arrow X offset"
+	/>
+  <attribute
+		name="tabitem-tab-y-offset"
+		type="integer"
+		appliesTo="TabItem"
+		description="TabItem Y offset"
+	/>
+</attributes>

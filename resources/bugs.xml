@@ -1,0 +1,168 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:xf="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <head>
+  <title>J2ME Polish Bugs</title>
+  <xf:model>
+    <xf:instance xmlns="" id="document">
+    <data>
+    	<page>intro</page>
+    	<test1>John</test1>
+    	<test2>John</test2>
+    	<test3>John</test3>
+    </data>
+ 
+    </xf:instance>
+
+  </xf:model>
+</head>
+<body>
+  <xf:select1 ref="/data/page" appearance="minimal">
+  	<xf:label>Page</xf:label>
+  	<xf:choices>
+      <xf:item>
+        <xf:label>Introduction</xf:label>
+        <xf:value>intro</xf:value>
+        <xf:toggle ev:event="xforms-select" case="intro"/>
+      </xf:item>
+      <xf:item>
+        <xf:label>ChoiceTextField1</xf:label>
+        <xf:value>ChoiceTextField1</xf:value>
+        <xf:toggle ev:event="xforms-select" case="ChoiceTextField1"/>
+      </xf:item>
+      <xf:item>
+        <xf:label>ChoiceTextField2</xf:label>
+        <xf:value>ChoiceTextField2</xf:value>
+        <xf:toggle ev:event="xforms-select" case="ChoiceTextField2"/>
+      </xf:item>
+      <xf:item>
+        <xf:label>ChoiceTextField3</xf:label>
+        <xf:value>ChoiceTextField3</xf:value>
+        <xf:toggle ev:event="xforms-select" case="ChoiceTextField3"/>
+      </xf:item>
+    </xf:choices>
+  </xf:select1>
+
+  <xf:switch>
+  	<xf:case id="intro">
+  	   <p>This form is used for demonstrating and testing various bugs in J2ME Polish UI.</p>
+  	   <p>Please select test case.</p>
+  	</xf:case>
+
+  	<xf:case id="ChoiceTextField1">
+  	  <p>Phone: S60 3rd ed. (E50, E70, E90 tested)</p>
+  	  <p>Add the Surname "Smith" to text below (using number pad, not qwerty).</p>
+
+	  <xf:select1 ref="/data/test1" appearance="minimal" selection="open">
+	  	<xf:label>Contact</xf:label>
+	  	<xf:choices>
+	      <xf:item>
+	        <xf:label>John</xf:label>
+	        <xf:value>John</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Jane</xf:label>
+	        <xf:value>Jane</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Dilbert</xf:label>
+	        <xf:value>Dilbert</xf:value>
+	      </xf:item>
+	    </xf:choices>
+	  </xf:select1>  	  
+
+      <p>Result: Application hangs.</p>
+
+  	</xf:case>
+
+
+
+  	<xf:case id="ChoiceTextField2">
+  	  <p>Phone: S60 3rd edition qwerty (E61i, E90 tested)</p>
+  	  <p>Press "f" (lower case) in the form control (use qwerty)</p>
+
+	  <xf:select1 ref="/data/test2" appearance="minimal" selection="open">
+	  	<xf:label>Contact</xf:label>
+	  	<xf:choices>
+	      <xf:item>
+	        <xf:label>John</xf:label>
+	        <xf:value>John</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Jane</xf:label>
+	        <xf:value>Jane</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Dilbert</xf:label>
+	        <xf:value>Dilbert</xf:value>
+	      </xf:item>
+	    </xf:choices>
+	  </xf:select1>
+	  
+	  <p>Result: Selection list opens, letter is not added</p>
+	  
+  	</xf:case>
+
+  	<xf:case id="ChoiceTextField3">
+  	  <p>Phone: S60 3rd edition (E50 tested)</p>
+      <p>Press fire in the form control to open list and scroll down.</p>
+
+	  <xf:select1 ref="/data/test3" appearance="minimal" selection="open">
+	  	<xf:label>Contact</xf:label>
+	  	<xf:choices>
+	      <xf:item>
+	        <xf:label>John</xf:label>
+	        <xf:value>John</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Jane</xf:label>
+	        <xf:value>Jane</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Dilbert</xf:label>
+	        <xf:value>Dilbert</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Dick</xf:label>
+	        <xf:value>Dick</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Matt</xf:label>
+	        <xf:value>Matt</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Stephen</xf:label>
+	        <xf:value>Stephen</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Gabriel</xf:label>
+	        <xf:value>Gabriel</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Martin</xf:label>
+	        <xf:value>Martin</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Jim</xf:label>
+	        <xf:value>Jim</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Mary</xf:label>
+	        <xf:value>Mary</xf:value>
+	      </xf:item>
+	      <xf:item>
+	        <xf:label>Sue</xf:label>
+	        <xf:value>Sue</xf:value>
+	      </xf:item>
+	    </xf:choices>
+	  </xf:select1>
+	  
+	  <p>Result: Focus disappears "below the screen" (likely because form control is nested within a container).</p>
+	    
+  	</xf:case>
+  
+  </xf:switch>
+
+</body>
+</html>

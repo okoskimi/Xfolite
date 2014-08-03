@@ -1,0 +1,299 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:xf="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <head>
+  <title>Maintenance</title>
+  <xf:model>
+    <xf:instance xmlns="" id="document">
+		<Data>
+		    <lang-set>false</lang-set>
+		    <lang-load>false</lang-load>
+			<page>info</page>
+			<contact>John Doe</contact>
+			<email>john.doe@example.com</email>
+			<phone>555-123456</phone>
+			<task>Gremlins in the hallways</task>
+			<resolution>Repair</resolution>
+			<tasks/>
+			<problem/>
+			<problemcode/>
+			<part>None</part>
+			<part2>None</part2>
+			<partlist/>
+			<time>30</time>
+			<bill/>
+			<maxprice>10000</maxprice>
+			<parts>
+			  <part name="Lock / Office door">
+			    <name>Abloy A-3453</name>
+			    <description>Lock for regular office door</description>
+			    <price>36</price>
+			  </part>
+			  <part name="Lock / Outside door">
+			    <name>Abloy B-503</name>
+			    <description>Lock for outside doors</description>
+			    <price>54</price>
+			  </part>
+			  <part name="Lock / Fire door">
+			    <name>Abloy F-54</name>
+			    <description>Lock for fire doors</description>
+			    <price>87</price>
+			  </part>
+			  <part name="Handle / Office door">
+			    <name>Hanbar 45-5</name>
+			    <description>Handle for regular office door</description>
+			    <price>12</price>
+			  </part>
+			  <part name="Handle / Outside or fire door (reinforced)">
+			    <name>Hanbar 3-56</name>
+			    <description>Handle for outside or fire doors</description>
+			    <price>23</price>
+			  </part>
+			  <part name="Office door">
+			    <name>DuraMax Office</name>
+			    <description>Replacement office door</description>
+			    <price>200</price>
+			  </part>
+			  <part name="Outside door">
+			    <name>DuraMax Weatherproof</name>
+			    <description>Replacement outside door</description>
+			    <price>500</price>
+			  </part>
+			  <part name="Fire door">
+			    <name>DuraMax Firedrake</name>
+			    <description>Replacement fire door</description>
+			    <price>800</price>
+			  </part>
+			  <part name="None">
+			    <name>No part</name>
+			    <description>No part</description>
+			    <price>0</price>
+			  </part>
+			</parts>
+
+		</Data>
+    </xf:instance>
+    
+    <xf:instance xmlns="" id="locale">
+    	<locale>
+    		<language>Not set</language>
+    	</locale>
+    </xf:instance>
+    
+    <xf:submission id="get-locale-en" replace="instance" instance="locale" action="resource:/maintenance_en.xml" method="get">
+    	<xf:action ev:event="xforms-submit-error">
+ 			<xf:message>Unable to load English texts!</xf:message>
+     	</xf:action>
+    	<xf:action  ev:event="xforms-submit-done">
+    		<xf:message if="boolean-from-string(instance('document')/lang-set)">Language set to English.</xf:message>
+    		<xf:setvalue ref="instance('document')/lang-set" value="'true'"/>
+    	</xf:action>
+	</xf:submission> 	
+
+    <xf:submission id="get-locale-fi" replace="instance" instance="locale" action="resource:/maintenance_fi.xml" method="get">
+    	<xf:action ev:event="xforms-submit-error">
+ 			<xf:message>Suomenkielisiä tekstejä ei saatavissa!</xf:message>
+     	</xf:action>
+    	<xf:action  ev:event="xforms-submit-done">
+    		<xf:message if="boolean-from-string(instance('document')/lang-set)">Kieli asetettu suomeksi.</xf:message>
+    		<xf:setvalue ref="instance('document')/lang-set" value="'true'"/>
+    	</xf:action>
+	</xf:submission>
+	
+	<xf:action ev:event="xforms-ready">
+		<xf:message>Xforms-ready</xf:message>
+		<xf:action if="starts-with(property('microedition.locale'), 'fi-') or property('microedition.locale') = 'fi'">
+			<xf:message>get fi</xf:message>
+			<xf:send submission="get-locale-fi"/>
+			<xf:setvalue ref="instance('document')/lang-load" value="'true'"/>
+		</xf:action>
+		<xf:action if="instance('document')/lang-load = 'false' and (starts-with(property('microedition.locale'), 'en-') or property('microedition.locale') = 'en')">
+			<xf:message>get en</xf:message>
+			<xf:send submission="get-locale-en"/>
+			<xf:setvalue ref="instance('document')/lang-load" value="'true'"/>
+		</xf:action>
+		<xf:action if="instance('document')/lang-load = 'false'">
+			<xf:message>get default</xf:message>
+			<xf:send submission="get-locale-en"/>
+		</xf:action>
+	</xf:action>
+	
+    <xf:bind nodeset="/Data/time" type="xsd:integer"/>
+    <xf:bind nodeset="/Data/problem" relevant="/Data/resolution != 'No Fault'"/>
+    <xf:bind nodeset="/Data/problemcode" relevant="/Data/resolution != 'No Fault'"/>
+<xf:bind nodeset="/Data/problemcode" type="xsd:decimal"/>
+    <xf:bind nodeset="/Data/tasks" relevant="/Data/resolution = 'Repair'"/>
+    <xf:bind nodeset="/Data/part" relevant="/Data/resolution = 'Replace'"/>
+    <xf:bind nodeset="/Data/maxprice" relevant="/Data/resolution = 'Replace'" type="xsd:decimal"/>
+    <xf:bind nodeset="/Data/time" constraint="/Data/time &gt;= 30"/>
+    <xf:bind nodeset="/Data/bill" calculate="number(/Data/time) * 1.5 + (/Data/parts/part[@name=/Data/part]/price * number(if(/Data/resolution='Replace','1','0')))"/>
+	<xf:bind nodeset="/Data/parts/part/name" relevant="/Data/resolution = 'Replace'"/>
+	<xf:bind nodeset="/Data/parts/part/description" relevant="/Data/resolution = 'Replace'"/>
+	<xf:bind nodeset="/Data/parts/part/price" relevant="/Data/resolution = 'Replace'"/>
+  </xf:model>
+</head>
+<body>
+  <xf:input ref="/Data/contact">
+  	<xf:label>Contact</xf:label>
+  </xf:input>
+
+<xf:output value="property('microedition.locale')">
+	<xf:label>Locale</xf:label>
+</xf:output>
+
+<xf:output value="instance('locale')/language">
+	<xf:label>Language</xf:label>
+</xf:output>
+
+<xf:switch appearance="compact" id="pageselector">
+	<xf:label>Page</xf:label>
+<!-- ================================================================= -->
+
+  <xf:case id="infopage" lazy-init="true">
+  	<xf:label>Info</xf:label>
+
+   <xf:output ref="/Data/contact" class="myoutput">
+	<xf:label>Contact</xf:label>
+  </xf:output>
+
+  <xf:output ref="/Data/phone">
+	<xf:label>Phone</xf:label>
+  </xf:output>
+  
+  <xf:output ref="/Data/task">
+	<xf:label>Task</xf:label>
+  </xf:output>
+
+  <xf:trigger>
+    <xf:label>Go to Work</xf:label>
+    <xf:action ev:event="DOMActivate">
+    	<xf:toggle case="workpage"/>
+    	<xf:setfocus control="pageselector" />
+    </xf:action>
+  </xf:trigger>
+
+  </xf:case>
+
+<!-- ================================================================= -->
+
+  <xf:case id="workpage" lazy-init="true">
+	<xf:label>Work</xf:label>
+  
+  <xf:select1 ref="/Data/resolution" appearance="minimal">
+  	<xf:label>Resolution</xf:label>
+      <xf:item>
+        <xf:label>Repair</xf:label>
+        <xf:value>Repair</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Replace</xf:label>
+        <xf:value>Replace</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>No Fault</xf:label>
+        <xf:value>No Fault</xf:value>
+        <xf:message ev:event="xforms-select" if="/Data/time &gt; 30">Detecting no fault should not take more than 30 minutes!</xf:message>
+      </xf:item>
+    <xf:hint>Please select the type of solution applied to the problem.</xf:hint>
+  </xf:select1>
+
+  <xf:select ref="/Data/tasks" appearance="minimal">
+  	<xf:label>Tasks</xf:label>
+      <xf:item>
+        <xf:label>Fault Analysis</xf:label>
+        <xf:value>analysis</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Repair</xf:label>
+        <xf:value>repair</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Extensive On-Site User Training</xf:label>
+        <xf:value>training</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Cleanup</xf:label>
+        <xf:value>cleanup</xf:value>
+      </xf:item>
+    <xf:hint>Please select which tasks were included in the work you performed</xf:hint>
+  </xf:select>
+
+
+  <xf:range ref="/Data/time" start="0" end="240" step="15">
+    <xf:label value="concat('Work time: ',/Data/time,' min')" />
+    <xf:alert>Minimum charge is 30 minutes!</xf:alert>
+  </xf:range>
+
+  <xf:input ref="/Data/problem">
+    <xf:label>Problem description</xf:label>
+	<xf:hint>Please enter problem description here</xf:hint>
+  </xf:input>
+
+  <xf:input ref="/Data/problemcode">
+    <xf:label>Problem Code</xf:label>
+	<xf:hint>Please enter problem code here</xf:hint>
+  </xf:input>
+
+
+  <xf:select1 ref="/Data/part" id="partselection" appearance="minimal">
+  	<xf:label>Replacement part</xf:label>
+    <xf:itemset nodeset="/Data/parts/part[price &lt;= /Data/maxprice]">
+    	<xf:label ref="@name"/>
+    	<xf:value ref="@name"/>
+    </xf:itemset>
+    <xf:hint>Please select which replacement part was needed.</xf:hint>
+  </xf:select1>
+
+  <xf:output ref="/Data/parts/part[@name=/Data/part]/name">
+   <xf:label>Part ID</xf:label>
+  </xf:output>
+
+  <xf:output ref="/Data/parts/part[@name=/Data/part]/description">
+   <xf:label>Description</xf:label>
+  </xf:output>
+  
+  <xf:output ref="/Data/parts/part[@name=/Data/part]/price">
+   <xf:label>Price</xf:label>
+  </xf:output>
+
+  <xf:trigger>
+    <xf:label>Go to Final</xf:label>
+    <xf:action ev:event="DOMActivate">
+    	<xf:toggle case="finalpage"/>
+    	<xf:setfocus control="pageselector" />
+    </xf:action>
+  </xf:trigger>
+ </xf:case>
+
+<!-- ================================================================= -->
+
+ <xf:case id="finalpage" lazy-init="true">
+	<xf:label>Final</xf:label>
+
+  <xf:trigger>
+    <xf:label>Cancel</xf:label>
+    <xf:action ev:event="DOMActivate">
+    	<xf:message>Canceled!</xf:message>
+    	<xf:toggle case="infopage"/>
+    	<xf:setvalue ref="/Data/page" value="'info'"/>
+    </xf:action>
+  </xf:trigger>
+
+  <xf:trigger>
+    <xf:label>Submit</xf:label>
+    <xf:action ev:event="DOMActivate">
+    	<xf:message>In a real application, data would now be submitted.</xf:message>
+    </xf:action>
+  </xf:trigger> 
+ </xf:case>
+ </xf:switch>
+
+<!-- ================================================================= -->
+ 
+ <xf:output ref="/Data/bill">
+   <xf:label>Total EUR</xf:label>
+ </xf:output>
+
+</body>
+</html>

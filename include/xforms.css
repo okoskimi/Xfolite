@@ -1,0 +1,1312 @@
+/*
+ * This file is part of: Xfolite (J2ME XForms client)
+ *
+ * Copyright (c) 2010 Nokia Corporation and/or its subsidiary(-ies).
+ *
+ * Contact: Oskari Koskimies <oskari.koskimies@nokia.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ * You should have received a copy of the GNU Lesser
+ * General Public License along with this program.
+ * If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * This file contains the XForms-specific stylings 
+ */
+
+colors {
+	/*
+	xfBgColor:  white;
+	contextXfBgColor: #aff;
+	focusedXfBgColor:  #bbf;
+	*/
+	EagleWhite: #ededdd;
+	EagleGreen: #229c00;
+	EagleLightGrey: #dddddd;
+	EagleGrey: #ccccbb;
+	EagleDarkGrey: #444433;
+	EagleDarkRed: #661100;
+	EagleRed: #882211; 
+	
+	xfBgColor: EagleWhite;
+	contextXfBgColor: #aff;
+	focusedXfBgColor: EagleGreen;
+  	rangeBarColorFocused: #a68564;
+	rangeBarColorUnfocused: #99887a;
+
+}
+
+backgrounds {
+  EagleBasic {
+  		type: simple;
+  		color: EagleWhite;
+  }
+  EagleBasicFocused {
+  		type: simple;
+  		color: EagleGreen;
+  }
+  unfocusedTop {
+		type: partial-gradient;
+		start: 0%;
+		end: 15%;
+		top-color: #959584;
+		bottom-color: #ededdc;
+  }
+  unfocusedBottom {
+		type: partial-gradient;
+		start: 15%;
+		end: 100%;
+		top-color: #ededdc;
+		bottom-color: #ccccbb;
+  }
+  EagleUnfocusedBg {
+ 		type: combined;
+ 		foreground: unfocusedTop;
+ 		background: unfocusedBottom;
+  }
+
+  focusedLabelTop {
+		type: partial-gradient;
+		start: 0%;
+		end: 30%;
+		top-color: #48a415;
+		bottom-color: #65ca32;
+  }
+  focusedLabelBottom {
+		type: partial-gradient;
+		start: 30%;
+		end: 100%;
+		top-color: #65ca32;
+		bottom-color: #5bbe28;
+  }
+
+  EagleFocusedTop {
+		type: partial-gradient;
+		start: 0%;
+		end: 15%;
+		top-color: #6ecc3e;
+		bottom-color: #acff80;
+  }
+  EagleFocusedMiddle {
+		type: partial-gradient;
+		start: 15%;
+		end: 80%;
+		top-color: #acff80;
+		bottom-color: #6ecc3E;
+  }
+  EagleFocusedTopMiddle {
+   		type: combined;
+ 		foreground: EagleFocusedTop;
+ 		background: EagleFocusedMiddle;
+  }
+  EagleFocusedBottom {
+  		type: partial-gradient;
+  		start: 80%;
+		end: 100%;
+		top-color: #6ecc3e;
+		bottom-color: #6ecc3e;
+  }
+  
+  EagleFocusedBg {
+ 		type: combined;
+ 		foreground: EagleFocusedTopMiddle;
+ 		background: EagleFocusedBottom;
+  }
+
+/*
+  EagleFocusedTop {
+ 		type: combined;
+ 		foreground: focusedLabelTop;
+ 		background: focusedLabelBottom;
+  }
+  EagleFocusedBottom {
+		type: vertical-gradient;
+		top-color: #5bbe28;
+		bottom-color: #449f11;
+  }  
+ */
+  EagleTicker {
+   		type: combined;
+ 		background: EagleTickerTop;
+ 		foreground: EagleTickerBottom;
+  }
+  EagleTickerTop {
+		type: vertical-gradient;
+		top-color: EagleGrey;
+		bottom-color: titleBackgroundColor;
+		start: 0%;
+		end: 20%;
+  }   
+  EagleTickerBottom {
+		type: partial-gradient;
+		start: 80%;
+		end: 100%;
+		top-color: titleBackgroundColor;
+		bottom-color: EagleGrey;
+  }
+
+
+}
+
+
+.waitPopup {
+	margin-left: 10;
+	margin-right: 10;
+	padding: 5;
+	layout: horizontal-center | vertical-center | horizontal-shrink | vertical-shrink;
+	repaint-previous-screen: true;
+
+	border {
+		type: round-rect;
+		color: EagleDarkGrey;
+		arc: 20;
+	}
+	
+	background {
+		type: round-rect;
+		arc: 20;
+		color: EagleWhite;
+	}
+}
+
+
+
+tabbar {
+	background-color: EagleGrey;
+	layout: expand;
+	padding-bottom: 0;
+	border-type: bottom;
+	border-color: EagleWhite;
+	border-width: 1;
+	margin-bottom:0;
+
+
+	tabbar-left-arrow: url( left_unfocused.png );
+	tabbar-right-arrow: url( right_unfocused.png );
+	tabbar-arrow-y-offset: 3;
+	tabbar-roundtrip: true;
+
+}
+
+tabbar:hover extends tabbar {
+	background: none;
+	border-width: 5;
+	tabbar-left-arrow: url( left_focused.png );
+	tabbar-right-arrow: url( right_focused.png );
+}
+
+activetab {
+	padding-left: 10;
+	padding-right: 8;
+	padding-top: 7;
+	padding-bottom: 0;
+	
+	border:none;
+
+	background-type: round-tab;
+	background-color: EagleWhite;
+	background-arc: 8;
+	
+	font-color: black;
+	font-style: bold;
+}
+
+inactivetab {
+	margin-left: 2;
+	margin-right: 2;
+	margin-bottom: 0;
+	
+	padding-top: 3;
+	padding-left: 6;
+	padding-right: 4;
+	padding-bottom: 0;
+
+	border:none;
+
+	background-type: round-tab;
+	background-color: rangeBarColorUnfocused;
+	background-arc: 8;
+
+	font-color: black;
+}
+
+alert {
+	view-type: slide-up;
+}
+
+
+.xform {
+	background: EagleBasic; 
+	/* scroll-mode: normal; */
+}
+
+.xformsmessage {
+	layout: horizontal-center | bottom | vertical-shrink;
+	background: EagleBasic;
+}
+
+.wrapper {
+	padding-top: 2;
+	padding-bottom: 0;
+	padding-left: 2;
+	padding-right: 2; 
+	background: none;
+}
+
+.wrapperReadOnly extends .wrapper {
+	background-color: EagleLightGrey;
+}
+
+.wrapperReadOnly:hover extends .wrapperReadOnly {
+}	
+
+.layoutWrapper extends .wrapper {
+}
+
+.tabwrapper {
+	padding-top: 2;
+	padding-bottom: 0;
+	padding-vertical: 0;
+	padding-left: 2;
+	padding-right: 2;
+	margin-bottom: 0; 
+	background: none;
+	border: none;
+}
+
+.wrapper:hover extends .wrapper {
+	background: EagleFocusedBg;
+}	
+
+.layoutWrapper:hover extends .layoutWrapper {
+}
+
+.tabwrapper:hover extends .tabwrapper {
+	background: EagleFocusedBg;
+}	
+
+.wrapperLabel {
+	layout: left | expand;
+	text-wrap: false;
+	text-wrap-animate: false;
+	font-size: small;
+	font-style: bold;
+	font-face: normal;
+	font-color: EagleDarkGrey;
+	padding-bottom: 0;
+	padding-right: 0;
+	margin-bottom: 0;
+	margin-right: 0;
+	border: none;	
+}
+
+.wrapperLabelAlerts extends .wrapperLabel {
+	before: url( attention.png );
+}
+
+.wrapperLabelFocused extends .wrapperLabel {
+	font-color: black;
+	text-wrap: true;
+}
+
+.wrapperLabelAlertsFocused extends .wrapperLabelFocused {
+}
+
+
+.wrapperLabelRequired extends .wrapperLabel {
+	font-color: EagleRed;
+}
+
+.wrapperLabelRequiredAlerts extends .wrapperLabelRequired {
+	before: url( attention.png );
+}
+
+.wrapperLabelRequiredFocused extends .wrapperLabelRequired {
+	font-color: EagleDarkRed;
+	text-wrap: true;
+}
+
+.wrapperLabelRequiredAlertsFocused extends .wrapperLabelRequiredFocused {
+}
+
+.context {
+	background-color: contextXfBgColor;
+	layout: left|expand;
+	font-size: small;
+	font-style: normal;
+	font-face: normal;
+	font-color: black;	
+}
+
+.xformsbusy {
+	icon-image: url( busy.png );
+	background-color: contextXfBgColor;
+	layout: center | expand;
+	font-size: large;
+	font-style: normal;
+	font-face: normal;
+	font-color: black;	
+}
+
+.xformsfield {
+  	layout: expand |left;
+	background: none;
+	
+	border {
+		type: round-rect;
+		color: EagleDarkGrey;
+		arc: 10;
+	}
+	
+	/* border-type: round-rect; */
+	font-color: fontColor;	
+	font-face: monospace;
+	font-style: normal;
+	include-label: false;
+	margin:0;
+}
+
+.xformsalert {
+	visible: false;
+	layout: left;
+	font-size: small;
+	font-style: normal;
+	font-face: normal;
+	font-color: black;
+	before: url( attention.png );
+}
+
+.xformsalertFocused extends .xformsalert {
+	visible: true;
+}
+
+.requiredalert extends .xformsalert {
+}
+
+.requiredalertFocused extends .xformsalertFocused {
+}
+
+.xfmenuitem /* extends .xformsfield */ {
+/*	label-style: .xfmenuitemLabel;
+	focused-style: .xfmenuitemFocused; */
+	border:none;
+	background:none;
+}
+
+.xfmenuitemLabel extends .wrapperLabel {
+	/* layout: left | newline-after; */
+	font-color: black;
+}
+/*
+.xfmenuitemFocused extends .xfmenuitem {
+	background-color: red;
+	border-color: focusedXfBgColor;
+	label-style: .xfmenuitemLabelFocused;
+
+}
+*/
+.xfmenuitemLabelFocused extends .xfmenuitemLabel {
+	background-color: focusedXfBgColor;
+	border-color: focusedXfBgColor;
+}
+
+
+.trigger  extends .xformsfield {
+/*
+	margin:1;
+	border: none;
+	before: url( button_unfocused.png );
+	layout: expand | left | vcenter;
+	font-color: blue;
+	font-size: small;
+	font-face: normal;
+	font-style: bold;
+*/
+	margin: 2;
+	border {
+		type: round-rect;
+		color: #444433;
+		arc: 10;
+	}
+	padding-horizontal: 5;
+	
+	 background {
+		type: vertical-gradient;
+		
+		top-color: #999986;
+		bottom-color: #5A5944;
+		
+		/*
+		top-color: #838372;
+		bottom-color: #444433;
+		*/
+		start: 0%;
+		end: 100%;
+  	}
+
+	
+	
+	layout: expand | hcenter | vcenter;
+	font-color: white;
+	font-size: small;
+	font-face: normal;
+	font-style: bold;
+}
+
+.trigger:hover extends .trigger {
+	/*
+	before: url( button_focused.png );
+	background-color: focusedXfBgColor;
+	*/
+	background {
+		type: vertical-gradient;
+		
+		top-color: #797969;
+		bottom-color: #333326;
+		/*
+		top-color: #81e84f;
+		bottom-color: #3c9f0d;
+		*/
+		start: 0%;
+		end: 100%;
+  	}
+  	border {
+		type: round-rect;
+		color: black;
+		arc: 10;
+	}
+	font-color: #83f261;
+}
+
+.trigger:pressed extends .trigger {
+	/*
+	before: url( button_pressed.png );
+	background-color: focusedXfBgColor;
+	*/
+	background {
+		type: vertical-gradient;
+		/*
+		top-color: #888877;
+		bottom-color: #504f44;
+		*/
+		top-color: #333326;
+		bottom-color: #797969;
+		start: 0%;
+		end: 100%;
+  	}
+  	border {
+		type: round-rect;
+		color: black;
+		arc: 10;
+	}
+	font-color: #7ce65c;
+	
+}
+
+.tableTrigger extends .xformsfield {
+	layout: shrink | left;
+	margin: 2;
+	border {
+		type: round-rect;
+		color: #444433;
+		arc: 10;
+	}
+	padding-left: 5;
+	padding-right: 5;
+	padding-horizontal: 5;
+	background {
+		type: vertical-gradient;
+		top-color: #999986;
+		bottom-color: #5A5944;
+		start: 0%;
+		end: 100%;
+  	}
+	font-color: white;
+	font-size: small;
+	font-face: normal;
+	font-style: bold;
+}
+
+.tableTrigger:hover extends .tableTrigger {
+	background {
+		type: vertical-gradient;
+		top-color: #797969;
+		bottom-color: #333326;
+		start: 0%;
+		end: 100%;
+  	}
+  	border {
+		type: round-rect;
+		color: black;
+		arc: 10;
+	}
+	font-color: #83f261;
+}
+
+.tableTrigger:pressed extends .tableTrigger {
+	background {
+		type: vertical-gradient;
+		top-color: #333326;
+		bottom-color: #797969;
+		start: 0%;
+		end: 100%;
+  	}
+  	border {
+		type: round-rect;
+		color: black;
+		arc: 10;
+	}
+	font-color: #7ce65c;
+}	
+
+.submit  extends .xformsfield {
+	margin: 2;
+	border {
+		type: round-rect;
+		color: #444433;
+		arc: 10;
+	}
+	padding-horizontal: 5;
+	
+	 background {
+		type: vertical-gradient;
+		
+		top-color: #999986;
+		bottom-color: #5A5944;
+		
+		/*
+		top-color: #838372;
+		bottom-color: #444433;
+		*/
+		start: 0%;
+		end: 100%;
+  	}
+
+	
+	
+	layout: expand | hcenter | vcenter;
+	font-color: white;
+	font-size: small;
+	font-face: normal;
+	font-style: bold;
+}
+
+
+.submit:hover extends .submit {
+	background {
+		type: vertical-gradient;
+		
+		top-color: #797969;
+		bottom-color: #333326;
+		/*
+		top-color: #81e84f;
+		bottom-color: #3c9f0d;
+		*/
+		start: 0%;
+		end: 100%;
+  	}
+  	border {
+		type: round-rect;
+		color: black;
+		arc: 10;
+	}
+	font-color: #83f261;
+}
+
+.submit:pressed extends .submit {
+	background {
+		type: vertical-gradient;
+		/*
+		top-color: #888877;
+		bottom-color: #504f44;
+		*/
+		top-color: #333326;
+		bottom-color: #797969;
+		start: 0%;
+		end: 100%;
+  	}
+  	border {
+		type: round-rect;
+		color: black;
+		arc: 10;
+	}
+	font-color: #7ce65c;
+	
+}
+
+
+.input extends .xformsfield {
+	/* label-style: .inputLabel; */
+}
+
+.inputLabel extends .wrapperLabel {
+	/* layout: left | newline-after; */
+}
+
+.input:hover extends .input {
+	/* background: EagleFocusedBottom; */
+	background {
+		type: round-rect;
+		arc: 10;
+		color: white;
+	}
+	border-color: black;
+	/* border-width: 1;
+	border-color: black; */
+	/* label-style: .inputLabelFocused; */
+	/* font-color: white; 
+	textfield-caret-color: white; */
+/* 
+	border-type: round-rect;
+	border-arc: 6;
+	border-width: 5;
+*/
+}
+
+.inputLabel:hover extends .inputLabel {
+
+	/* background-color: focusedXfBgColor; */
+	/* background: EagleFocusedTop; */
+	border: none;
+	font-color: black;
+	margin-right: 1;
+}
+
+myoutput {
+  layout: expand | left;
+	background-color: xfBgColor;
+	font-color: fontColor;	
+	font-face: monospace;
+	font-style: normal;
+	label-style: .outputLabel;
+	/* Output elements cannot be focused */
+/*	focused-style: .outputFocused;*/
+	font-color: red;
+}
+
+
+.output {
+  layout: expand | left;
+	background-color: xfBgColor;
+	font-color: fontColor;	
+	font-face: monospace;
+	font-style: normal;
+	label-style: .outputLabel;
+	/* Output elements cannot be focused */
+/*	focused-style: .outputFocused;*/
+	include-label: false;
+}
+
+.outputLabel extends .wrapperLabel {
+}
+
+.outputFocused extends .output {
+	background-color: focusedXfBgColor;
+	label-style: .outputLabelFocused;
+/*
+	border-type: round-rect;
+	border-arc: 6;
+	border-width: 2;
+*/
+}
+
+.outputLabelFocused extends .outputLabel {
+	/* background-color: silver; */
+}
+
+.img {
+	layout: center | expand | vshrink;
+	background-color: xfBgColor;
+}
+
+.divider extends .wrapperLabel {
+	layout: center;
+	font-size: normal;
+	padding-horizontal: 5;
+}	
+
+
+
+.tableCheckbox {
+	layout: left;
+	background: none;
+	border:none;
+	font-color: black;	
+	font-face: proportional;
+	font-style: bold;
+	font-size: small;
+}
+	
+.tableCheckbox:hover extends .checkbox {
+}
+
+.tableCheckboxOption {
+	margin: 2;
+	padding-horizontal: 5;
+	checkbox-plain: url( checkbox_unchecked.png );
+	checkbox-selected: url( checkbox_checked.png );
+	font-size: small;
+	font-style: bold;
+	font-color: EagleDarkGrey;
+	layout: left | vcenter;
+	
+}
+
+.tableCheckboxOption:hover extends .tableCheckboxOption {
+	font-color: black;
+}
+
+
+.checkbox extends .xformsfield {
+/*	text-wrap: false; */
+	layout: vcenter;
+	border: none;
+	margin: 1;
+	include-label: false;
+	background: none;
+}
+	
+.checkbox:hover extends .checkbox {
+	/* background-color: focusedXfBgColor; */
+	background: EagleFocusedBg;
+}
+
+.checkboxOption {
+	margin: 2;
+	padding-horizontal: 5;
+	checkbox-plain: url( checkbox_unchecked.png );
+	checkbox-selected: url( checkbox_checked.png );
+	font-size: small;
+	font-style: bold;
+	font-color: EagleDarkGrey;
+	layout: left | vcenter | expand;
+	
+}
+
+.checkboxOption:hover extends .checkboxOption {
+	font-color: black;
+}
+
+
+.table {
+	layout: left | shrink;
+	expand-items: true;
+	padding: 3;
+	padding-left: 5;
+	padding-vertical: 1;
+	border {
+		type: round-rect;
+		color: EagleDarkGrey;
+		arc: 20;
+	}
+	table-line-color: EagleDarkGrey;
+	table-selected-background: EagleFocusedBg;
+}
+
+.layoutTable {
+	layout: left | expand;
+	expand-items: true;
+	padding: 3;
+	padding-left: 5;
+	padding-vertical: 1;
+	border: none;
+	table-line-color: EagleWhite;
+	background: none;	
+}
+
+.layoutTable:hover extends .layoutTable {
+}
+
+
+.table:hover extends .table {
+	border {
+		type: round-rect;
+		color: black;
+		arc: 20;
+	}
+	table-line-color: black;
+	background {
+		type: round-rect;
+		arc: 20;
+		color: white;
+	}
+}
+
+tableEvenRow {
+  	layout: shrink;
+  	background: none;
+	border:none;
+	margin: 0;
+}
+
+tableEvenRow:hover extends tableEvenRow {
+}
+
+tableOddRow {
+ 	layout: shrink;
+  	background: none;
+	border:none;
+	margin: 0;
+}
+
+tableOddRow:hover extends tableOddRow {
+}
+
+.tableData {
+  	layout: shrink;
+	background: none;
+	border: none;
+}
+
+.layoutTableData {
+  	layout: shrink;
+	background: none;
+	border: none;
+}
+
+.tableData:hover extends .tableData {
+}
+
+.tableDataContent {
+	layout: left | shrink;
+	background: none;
+	border:none;
+	font-color: fontColor;	
+	font-face: proportional;
+	font-style: normal;
+	font-size: small;
+}
+
+.tableDataContent:hover extends .tableDataContent {
+}
+
+
+.tableHeader {
+  	layout: shrink;
+	background: none;
+	border:none;
+	margin: 0;
+}
+
+.tableHeader:hover extends .tableHeader {
+}
+
+.tableHeaderContent {
+	layout: left | shrink;
+	background: none;
+	border:none;
+	font-color: black;	
+	font-face: proportional;
+	font-style: bold;
+	font-size: small;
+}
+
+.tableHeaderContent:hover extends .tableHeaderContent {
+}
+
+evenRowSelector {
+	margin: 0;
+	radiobox-plain: url( radiobutton_unchecked.png );
+	radiobox-selected: url( radiobutton_checked.png );
+	layout: hcenter | vcenter | shrink;
+  	background: none;
+	border: none;
+}
+
+evenRowSelector:hover extends .tableSelector {
+}
+
+oddRowSelector {
+	margin: 0;
+	radiobox-plain: url( radiobutton_unchecked.png );
+	radiobox-selected: url( radiobutton_checked.png );
+	layout: hcenter | vcenter | shrink;
+  	background: none;
+	border: none;
+}
+
+oddRowSelector:hover extends .tableSelector {
+}
+
+
+
+.select1ChoiceGroup extends .xformsfield {
+/*	text-wrap: false; */
+	padding: 3;
+	padding-left: 5;
+	padding-vertical: 1;
+	border {
+		type: round-rect;
+		color: EagleDarkGrey;
+		arc: 20;
+	}
+	label-style: .select1Label;
+	include-label: false;
+}
+	
+.select1ChoiceGroup:hover extends .select1 {
+	border {
+		type: round-rect;
+		color: black;
+		arc: 20;
+	}
+	background {
+		type: round-rect;
+		arc: 20;
+		/* color: xfBgColor; */
+		color: white;
+	}
+	label-style: .select1LabelFocused;
+}	
+
+.select1Label extends .wrapperLabel {
+	layout: left | expand | newline-after;
+}
+
+.select1LabelFocused extends .select1Label{
+	background: EagleFocusedTop;
+}
+
+.select1TextField extends .select1ChoiceGroup {
+	after: url( choice_unfocused.png );
+	include-label: false;
+	label-style: .select1Label;
+	border {
+		type: round-rect;
+		color: EagleDarkGrey;
+		arc: 20;
+	}
+	background {
+		type: round-rect;
+		arc: 20;
+		color: EagleWhite;
+	}
+	font-size: normal;
+	choicetextfield-choicestyle: .select1Choice;
+	choicetextfield-containerstyle: .select1ChoicesContainer;
+}
+
+.select1TextField:hover extends .select1TextField {
+	border {
+		type: round-rect;
+		color: black;
+		arc: 20;
+	}
+	background {
+		type: round-rect;
+		arc: 20;
+		color: white;
+	}
+	label-style: .select1LabelFocused;
+	after: url( choice_focused.png );
+}
+
+
+.select1Choice {
+	layout: left | expand;
+	padding: 2;
+	font-size: small;
+	font-style: plain;
+	font-color: black;
+	background: none;
+}
+
+.select1Choice:hover extends .select1Choice {
+	background: EagleFocusedBg;
+}
+
+.select1ChoicesContainer {
+	background-color: xfBgColor;
+	border-width: 1;
+	border-color: black;
+	layout: left | expand;
+}
+
+.select1ChoicesContainer:hover extends .select1ChoicesContainer  {
+	background-color: white;
+}
+
+
+.select1FilteredChoice extends .xformsfield {
+	label-style: .select1Label;
+	after: url( choice_unfocused.png );
+	font-size: small;
+	font-style: bold;
+	/* text-wrap: false; */
+	padding: 3;
+	padding-left: 5;
+	padding-vertical: 1;
+	include-label: false;
+	border {
+		type: round-rect;
+		color: EagleDarkGrey;
+		arc: 20;
+	}
+	choicetextfield-choicestyle: .select1FilteredTextField;
+	choicetextfield-containerstyle: .select1FilteredContainer;
+	layout: left | expand;
+	/** style of the filter-textfield of a FilteredList/FilteredChoiceGroup */
+	filter-style: select1FilteredFilterStyle;
+	/** style of the popup screen for a FileredChoiceGroup */
+	popup-style: select1FilteredPopupStyle;
+	background-color: xfBgColor;
+}
+
+.select1FilteredChoice:hover extends .select1FilteredChoice {
+	border {
+		type: round-rect;
+		color: black;
+		arc: 20;
+	}
+	background {
+		type: round-rect;
+		arc: 20;
+		color: white;
+	}
+	label-style: .select1LabelFocused;
+	after: url( choice_focused.png );
+}
+
+.select1FilteredFilterStyle {
+	margin-left: 2;
+	margin-right: 2;
+	before: url( search.png );
+	background {
+		type: round-rect;
+		arc: 20;
+		color: white;
+	}
+	border {
+		type: round-rect;
+		color: EagleDarkGrey;
+		arc: 20;
+	}
+	layout: expand | left;
+}
+
+.select1FilteredPopupStyle {
+	repaint-previous-screen: true;
+	margin: 10;
+	padding: 5;
+	background {
+		type: round-rect;
+		arc: 20;
+		color: EagleWhite;
+	}
+	border {
+		type: round-rect;
+		color: black;
+		arc: 20;
+	}
+}
+
+.select1FilteredTextField {
+	padding: 2;
+	font-size: small;
+	font-style: plain;
+	font-color: gray;
+	layout: left | expand;
+}
+
+.select1FilteredTextField:hover extends .select1FilteredTextField {
+	background-color: focusedXfBgColor;
+	border-color: black;
+	border-width: 2;
+}
+
+.select1FilteredContainer {
+	background-color: argb( 210, 255, 255, 255 );
+	layout: left | expand;
+}
+
+.select1Option {
+	margin: 2;
+	radiobox-plain: url( radiobutton_unchecked.png );
+	radiobox-selected: url( radiobutton_checked.png );
+	checkbox-plain: url( checkbox_unchecked.png );
+	checkbox-selected: url( checkbox_checked.png );
+	font-size: small;
+	font-style: bold;
+	layout: left | vcenter | expand;
+	background: none;
+}
+
+.select1Option:hover {
+	background: EagleFocusedBg;
+}
+
+
+
+.select extends .xformsfield {
+	/* text-wrap: false; */
+	padding: 3;
+	padding-left: 5;
+	padding-vertical: 1;
+	border {
+		type: round-rect;
+		color: EagleDarkGrey;
+		arc: 20;
+	}
+	background: none;
+/*
+	background {
+		type: round-rect;
+	}
+	*/
+	/* include-label: true; */
+
+	font-style: bold;
+	font-size: small;
+	label-style: .selectLabel;
+	include-label: false;
+}
+	
+.select:hover extends .select {
+	/* background-color: focusedXfBgColor; */
+	border {
+		type: round-rect;
+		color: black;
+		arc: 20;
+	}
+	background {
+		type: round-rect;
+		arc: 20;
+		color: white;
+	}
+	label-style: .selectLabelFocused;
+/*
+	border-type: round-rect;
+	border-arc: 6;
+	border-width: 2;
+*/
+}	
+
+.selectLabel extends .wrapperLabel {
+	layout: left | expand | newline-after;
+}
+
+.selectLabelFocused extends .selectLabel{
+	background-color: focusedXfBgColor;
+	border-color: focusedXfBgColor;
+}
+
+.selectTextField extends .select {
+	after: url( choice_unfocused.png );
+	choicetextfield-choicestyle: .selectChoice;
+	choicetextfield-containerstyle: .selectChoicesContainer;
+	include-label: false;
+}
+
+.selectTextField:hover extends .select {
+	after: url( choice_focused.png );
+	border {
+		type: round-rect;
+		color: black;
+		arc: 20;
+	}
+	background {
+		type: round-rect;
+		arc: 20;
+		color: white;
+	}
+	label-style: .selectLabelFocused;
+}
+
+
+.selectChoice {
+	padding: 2;
+	background-color: xfBgColor;
+	font-size: small;
+	font-style: plain;
+	font-color: black;
+	layout: left | expand;
+}
+
+.selectChoice:hover extends .selectChoice {
+	/* This is the same thing as silver, though with slight transparency */
+	background-color: focusedXfBgColor;
+}
+
+.selectChoicesContainer {
+	background-color: xfBgColor;
+	border-width: 1;
+	border-color: black;
+	layout: left | expand;
+}
+
+.range extends .xformsfield {
+	border {
+		type: round-rect;
+		color: EagleDarkGrey;
+		arc: 5;
+	}
+	background: none;
+	
+	label-style: .rangeLabel;
+	gauge-mode: continuous;
+	gauge-color: rangeBarColorUnfocused;
+	gauge-show-value: false; /* Range class does not support it yet */
+	gauge-value-align: center;
+	font-style: bold;
+}
+
+.progressBar extends .range {
+	gauge-show-value: false;
+	margin-bottom: 5;
+}
+
+.rangeLabel extends .wrapperLabel {
+	layout: left | expand | newline-after;
+	border: none;
+}
+
+.range:hover extends .range {
+	border {
+		type: round-rect;
+		color: black;
+		arc: 5;
+	}
+	background {
+		type: round-rect;
+		arc: 5;
+		color: white;
+	}
+	gauge-color: rangeBarColorFocused;
+	label-style: .rangeLabelFocused;
+}
+
+.rangeLabelFocused extends .rangeLabel {
+	background: EagleFocusedTop;
+	border: none;
+}
+
+
+
+
+.group {
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+	
+
+
+
+.hintticker {
+	ticker-step: 4;
+	background-color: titleBackgroundColor;
+	padding-horizontal: 5;
+	layout: vertical-center;
+	font-color: white;
+	font-size: small;
+	border: none;
+}
+

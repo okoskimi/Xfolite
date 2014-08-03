@@ -1,0 +1,303 @@
+<project 
+	name="com.nokia.xfolite.XFormsMidlet" 
+	default="j2mepolish">
+
+	<!-- import user specific properties                          -->
+	<property file="${user.name}.properties" />
+
+	<!-- The polish.home property needs to point to the directory -->
+	<!-- containing the J2ME Polish installation.                 -->
+	<property name="polish.home" location="C:\Program Files\J2ME-Polish" />
+	<!-- property name="polish.client.source" location="C:\Program Files\J2ME-Polish\build"/ -->
+	
+	
+	<!-- import global properties                                 -->
+	<property file="${polish.home}/global.properties" />
+
+
+	<!-- the device for the test mode - you can define it on the command-line
+	     using the -D switch, e.g. ant -Ddevice=Generic/midp2 emulator -->
+	<property name="testdevices" value="Nokia/Series40E5FP1" />
+	<property name="devices" value="Nokia/E61i" />
+	<property name="releasedevices" value="Nokia/2330_custom,Nokia/E90_custom,Nokia/E61i,Nokia/E50,Nokia/E70,Nokia/6680,Generic/DefaultColorPhone" />
+
+
+
+	<!-- Definition of the J2ME Polish task:                      -->
+	<taskdef name="j2mepolish" 
+		classname="de.enough.polish.ant.PolishTask" 
+		classpath="${polish.home}/lib/enough-j2mepolish-build.jar:${polish.home}/lib/jdom.jar"
+	/>
+
+
+	<!-- build targets, each target can be called via "ant [name]", 
+		 e.g. "ant clean", "ant test j2mepolish" or just "ant" for calling the default-target -->
+
+	<target name="setdeploy" 
+		description="Call this target first to set the OTA download-URL, e.g. ant setdeploy j2mepolish"
+		>
+		<property name="deploy-url" value="http://www.company.com/download/" />
+	</target>
+
+	<target name="enableDebug" 
+		description="Call this target first to skip the obfuscation step, call the emulator and start the debugger, e.g. ant enableDebug j2mepolish"
+		>
+		<property name="debug" value="true" />
+	</target>
+
+	<!-- Disable signing -->
+	<target name="no-sign" description="Disables signing">
+		<property name="signing.disabled" value="true" />
+		<echo level="info" message="Signing is disabled..." />
+	</target>
+
+	<target name="test" 
+		description="Call this target first to skip the obfuscation step and call the emulator, e.g. ant test j2mepolish"
+		>
+		<property name="test" value="true" />
+		<property name="signing.disabled" value="true"/>
+		<property name="dir.work" value="build/test" />
+	</target>
+
+	<target name="init">
+		<property name="test" value="false" />
+		<property name="dir.work" value="build/real" />
+		<property name="deploy-url" value="" />
+		<property name="resource.dir" value="resources" />
+		<tstamp/>
+		<property name="xfolite.version" value="${DSTAMP}${TSTAMP}" />
+		<property name="xfolite.menuLabel" value="${jad.menuLabel}" />
+	</target>
+
+	<target name="j2mepolish" 
+			depends="init"
+			description="This is the controller for the J2ME build process." 
+			>
+		<j2mepolish>
+			<info
+				name="Xfolite"
+				version="1.0.0"
+				icon="app_icon.png"
+				description="A midlet for running XForms forms"
+				vendorName="Nokia Corporation"
+				infoUrl="http://www.nokia.com"
+				jarName="Xfolite-${xfolite.version}-${polish.vendor}-${polish.name}-${polish.locale}.jar" 
+				jarUrl="Xfolite-${xfolite.version}-${polish.vendor}-${polish.name}-${polish.locale}.jar"
+				copyright="Copyright 2006-2010 Nokia Corporation."
+			/>
+
+			<deviceRequirements if="test">
+				<requirement  name="Identifier" value="${testdevices}" />
+			</deviceRequirements>
+			<deviceRequirements if="release">
+				<requirement  name="Identifier" value="${releasedevices}" />
+			</deviceRequirements>
+			<deviceRequirements unless="test">
+				<requirement name="Identifier" value="${devices}"/>
+			</deviceRequirements>
+			<!-- build settings -->
+			<!-- 
+			 -->
+			<build
+				symbols="ExampleSymbol, AnotherExample"
+				fullscreen="menu"
+				usePolishGui="true"
+				workDir="${dir.work}"
+			>
+
+				<sources>
+					<source dir="${basedir}/source" />
+				</sources>
+
+
+
+				<midlet class="com.nokia.xfolite.client.XFormsMidlet" name="Xfolite" />
+				<variables includeAntProperties="true" >
+<!--
+					<variable name="nokia.E61hack" value="false" />
+					<variable name="nokia.codeGeneration" value="false"/>
+					<variable name="nokia.perfTrace.enabled" value="false"/>
+					<variable name="polish.animationInterval" value="100" />
+					<variable name="polish.supportInvisibleItems" value="true" />
+					<variable name="dir.include" value="include" />
+					<variable name="polish.TextField.useDirectInput" value="true" />
+					<variable name="polish.key.ClearKey" value="8" />
+					<variable name="polish.TextField.supportSymbolsEntry" value="false" />
+					<variable name="polish.MenuBar.useExtendedMenuBar" value="true" />
+					<variable name="polish.useScrollBar" value="true" />
+					<variable name="polish.useDynamicStyles" value="true" />
+					<variable name="polish.ScreenInfo.enable" value="true" />
+					<variable name="polish.Container.allowCycling" value="false"/>
+-->
+					<variable name="nokia.E61hack" value="false" />
+					<variable name="nokia.perfTrace.enabled" value="false"/>
+					<variable name="polish.animationInterval" value="100" />
+					<variable name="polish.supportInvisibleItems" value="true" />
+					<variable name="dir.include" value="include" />
+					<variable name="polish.TextField.useDirectInput" value="true" />
+					<variable name="polish.TextField.allowNativeModeSwitch" value="true"/>
+					<!-- <variable name="polish.key.ClearKey" value="8" /> -->
+					<variable name="polish.TextField.supportSymbolsEntry" value="true" />
+					<variable name="polish.DateField.useDirectInput" value="true" />
+					<variable name="polish.DateField.useDirectInputForPointer" value="true" />
+					<!-- todo: define date format in localization files instead -->
+					<variable name="polish.DateFormat" value="ymd" />
+					<variable name="polish.MenuBar.useExtendedMenuBar" value="true" />
+					<variable name="polish.useScrollBar" value="true" />
+					<variable name="polish.useDynamicStyles" value="true" />
+					<variable name="polish.ScreenInfo.enable" value="true" />
+					<variable name="polish.Container.allowCycling" value="false"/>
+					
+					<variable name="polish.TextField.suppressDeleteCommand" value="false"/>
+					<variable name="polish.TextField.keepDeleteCommand" value="false"/>
+										
+					
+					<variable name="polish.css.text-wrap" value="true"/>
+					<variable name="polish.TextField.suppressAddSymbolCommand" value="false"/>
+					<variable name="polish.TextField.suppressClearCommand" value="true"/>
+					<variable name="polish.TextField.includeInputInfo" value="true" />
+					
+					<variable name="polish.debugEnabled" value="true"/>
+			<!--	<variable name="polish.MenuBar.useMiddleCommand" value="true"/>	 -->
+					
+				</variables>
+				<resources
+					dir="${resource.dir}"
+					defaultexcludes="yes"
+					excludes="readme.txt"
+				>
+					<!-- 
+					<localization locales="de_DE, en_US" unless="test" />
+					<localization locales="en_US" if="test" />
+					-->
+					<localization defaultLocale="en" locales="en,fi" if="localize" />
+					<localization defaultLocale="en" locales="en" unless="localize" />
+				</resources>
+				<!-- obfuscator settings: do not obfuscate when the test-property is true -->
+				<obfuscator name="ProGuard" unless="test" >
+					<!--
+					You can set additional parameters here, e.g.:
+					<parameter name="optimize" value="false" />
+					-->
+				</obfuscator>
+				<!-- debug settings: only include debug setting when the test-property is true -->
+				<debug if="test" showLogOnError="false" verbose="true" level="info">
+					<filter pattern="com.nokia.xfolite.*" level="info" />
+					<filter pattern="com.nokia.xfolite.client.*" level="debug" />
+					<filter pattern="com.nokia.xfolite.client.database.*" level="info" />
+					<filter pattern="com.nokia.xfolite.xforms.model.datatypes.DataTypeDate" level="info" />
+					<filter pattern="com.nokia.xfolite.client.XFormsController" level="info" />
+					<filter pattern="com.nokia.xfolite.client.PolishWidgetFactory" level="info" />
+					<filter pattern="de.enough.polish.ui.*" level="info" />
+				</debug>
+				<!-- user defined JAD attributes can also be used: -->
+				<jad>
+					<attribute name="MicroEdition-Configuration" value="CLDC-1.0"/>
+					<attribute name="MicroEdition-Profile" value="MIDP-2.0"/>
+
+					<!-- MIDlet permissions -->
+					<attribute name="MIDlet-Permissions" value="javax.microedition.io.Connector.http,javax.microedition.io.Connector.https" />
+
+					<attribute name="Xfolite-Version" value="${xfolite.version}"/>
+					<attribute name="menu_label" value="Xfolite" />
+					
+					<attribute name="form1_label" value="Maintenance" />
+					<attribute name="form1_url" value="resource:/maintenance.xml" />					
+
+					<attribute name="form2_label" value="Form Controls" />
+					<attribute name="form2_url" value="resource:/formcontrols.xml" />					
+					
+					<attribute name="form3_label" value="J2ME Polish Bug Tests" />
+					<attribute name="form3_url" value="resource:/bugs.xml" />
+
+					<attribute name="form4_label" value="XFormsDB Blog" />					
+					<attribute name="form4_url" value="http://testbed.tml.hut.fi/blog/index.xformsdbmobile" />
+
+					<attribute name="form5_label" value="XFormsDB Blog Admin" />
+					<attribute name="form5_url" value="http://testbed.tml.hut.fi/blog/admin/index.xformsdbmobile" />
+
+					
+				</jad>
+
+			</build>
+
+			<!-- execution of emulator(s) -->
+			<emulator
+				wait="true"
+				securityDomain="trusted"
+				enableProfiler="true"
+				enableMemoryMonitor="true"
+				enableNetworkMonitor="true"
+				if="debug"
+				>
+				<!-- this is an example for connecting to a debugger - use the ${polish.debug.port} Ant property
+				     for getting to know the port of the debugger. In this example the 
+				     "connect-debugger" target is also required.
+				-->
+				<!--
+				<debugger name="antcall" target="connect-debugger" port="6001" />
+				-->
+			</emulator>
+
+			<emulator
+				wait="true"
+				trace="none"
+				securityDomain="trusted"
+				enableProfiler="false"
+				enableMemoryMonitor="false"
+				enableNetworkMonitor="false"
+				if="test and not debug"
+				>
+			</emulator>
+
+
+		</j2mepolish>
+	</target>
+
+	<target 
+		name="emulator"
+		depends="test,j2mepolish"
+		description="invokes the emulator"
+	>
+	</target>
+
+	<target
+		name="perf" 
+		description="Starts application in performance testing mode">
+		<exec executable="java">
+			<arg value="-cp"/>
+			<arg value="C:\APPS\microemulator\microemulator.jar;C:\APPS\microemulator\lib\microemu-jsr-75.jar"/>
+			<arg value="-agentlib:yjpagent"/>
+			<arg value="org.microemu.app.Main"/>
+			<arg value="--impl"/>
+			<arg value="org.microemu.cldc.file.FileSystem"/>
+			<arg value="--appclassloader"/>
+			<arg value="delegating"/>
+			<arg value="dist/Xfolite.jad"/>
+		</exec>
+	</target>
+	
+	<target name="clean" 
+	  		description="allows a clean build. You should call [ant clean] whenever you made changes to devices.xml, vendors.xml or groups.xml">
+		<delete dir="build" />
+		<delete dir="dist" includes="**/*" />
+	</target>
+
+	<target  
+		name="cleanbuild"
+		description="allows a clean build. You should call [ant cleanbuild] whenever you made changes to devices.xml, vendors.xml or groups.xml"
+		depends="clean, j2mepolish"
+	/>
+
+	<target name="debug" description="debugs the project" depends="enableDebug, test, j2mepolish" />
+
+	<target name="localize" description="Activates localization in build process">
+		<property name="localize" value="true"/>
+	</target>
+	
+	<target name="release" depends="clean" description="Builds all release devices and adds localization automatically">
+		<property name="release" value="true"/>
+		<property name="localize" value="true"/>
+	</target>
+	
+</project>

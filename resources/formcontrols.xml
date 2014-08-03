@@ -1,0 +1,575 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:xf="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <head>
+  <title>Form Controls</title>
+  <xf:model>
+    <xf:instance xmlns="" id="document">
+    <data>
+    	<if/>
+    	<reqflag>true</reqflag>
+    	<req/>
+    	<notreq/>
+    	<roflag>true</roflag>
+    	<ro>Read-only data</ro>
+    	<notro>Read-write data</notro>
+    	<relflag>true</relflag>
+    	<rel/>
+    	<notrel/>
+    	<con>100</con>
+    	<reqcon></reqcon>
+    	<notcon/>
+    	<conflag>true</conflag>
+    	<date>2010-01-01</date>
+    	<time>00:00:00</time>
+    	<!-- If Z is left out below we get funny behavior - TODO: Investigate! -->
+    	<datetime>2010-01-01T00:00:00</datetime>
+    	<sel1>One</sel1>
+    	<sel/>
+    	<pw/>
+						<dTableFilter>1000000</dTableFilter>
+						<dTableEditIndex>1</dTableEditIndex>
+						<dTableRepeatIndex>1</dTableRepeatIndex>
+						<dTable>
+						    
+							<row>
+								<name>One</name>
+								<price>10</price>
+								<quantity>100</quantity>
+								<code>B525</code>
+								<country>FI</country>
+								<quality>good</quality>
+							</row>
+							<row>
+								<name>Two</name>
+								<price>20</price>
+								<quantity>200</quantity>
+								<code>D234</code>
+								<country>GB</country>
+								<quality>avg</quality>
+							</row>
+							<row>
+								<name>Three</name>
+								<price>30</price>
+								<quantity>300</quantity>
+								<code>F987</code>
+								<country>US</country>
+								<quality>fine</quality>
+							</row>
+							
+						</dTable>
+    </data>
+ 
+    </xf:instance>
+	<xf:instance xmlns="" id="template">
+		<template>
+				<row>
+					<name>Product Name</name>
+					<price>0</price>
+					<quantity>0</quantity>
+					<code>A000</code>
+					<country>FI</country>
+					<quality>avg</quality>
+				</row>
+		</template>
+	</xf:instance>
+	<xf:bind nodeset="/data/reqflag" type="xsd:boolean" />
+	<xf:bind nodeset="/data/roflag" type="xsd:boolean" />
+	<xf:bind nodeset="/data/relflag" type="xsd:boolean" />
+	<xf:bind nodeset="/data/conflag" type="xsd:boolean" />
+	<xf:bind nodeset="/data/con" type="xsd:integer" />
+	<xf:bind nodeset="/data/reqcon" type="xsd:integer" />
+	<xf:bind nodeset="/data/date" type="xsd:date" />
+	<xf:bind nodeset="/data/time" type="xsd:time" />
+	<xf:bind nodeset="/data/datetime" type="xsd:dateTime" />
+	<xf:bind nodeset="/data/req" required="boolean-from-string(/data/reqflag)" />
+	<xf:bind nodeset="/data/ro" readonly="boolean-from-string(/data/roflag)" />
+	<xf:bind nodeset="/data/rel" relevant="boolean-from-string(/data/relflag)" />
+	<xf:bind nodeset="/data/con" constraint="not(boolean-from-string(/data/conflag)) or (/data/con < 100 and /data/con mod 10 = 0)" />
+	<xf:bind nodeset="/data/reqcon" constraint="not(boolean-from-string(/data/conflag)) or (/data/reqcon < 100 and /data/reqcon mod 10 = 0)" />
+	<xf:bind nodeset="/data/reqcon" required="true()" />
+	<xf:submission id="sub1" method="get" action="http://www.example.com/submit.asp"/>
+  </xf:model>
+</head>
+<body>
+  <xf:switch appearance="full">
+    <xf:label>Form Control</xf:label>
+  	<xf:case id="intro">
+  		<xf:label>Introduction</xf:label>
+  	   <p>This form is used for demonstrating Xfolite form controls.</p>
+  	   <p>Please select a form control.</p>
+  	</xf:case>
+
+  	<xf:case id="tabs">
+  		<xf:label>Tabs</xf:label>
+		<xf:switch appearance="compact">
+			<xf:label>Compact Switch</xf:label>
+			<xf:case id="tab11">
+				<xf:label>Tab 1</xf:label>
+				<p>Tab 1 content</p>
+			</xf:case>
+			<xf:case id="tab12">
+				<xf:label>Tab 2</xf:label>
+				<p>Tab 2 content</p>
+			</xf:case>
+			<xf:case id="tab13">
+				<xf:label>Tab 3</xf:label>
+				<p>Tab 3 content</p>
+			</xf:case>
+		</xf:switch>
+
+		<xf:switch appearance="full">
+			<xf:label>Full Switch</xf:label>
+			<xf:case id="tab21">
+				<xf:label>Tab 1</xf:label>
+				<p>Tab 1 content</p>
+			</xf:case>
+			<xf:case id="tab22">
+				<xf:label>Tab 2</xf:label>
+				<p>Tab 2 content</p>
+			</xf:case>
+			<xf:case id="tab23">
+				<xf:label>Tab 3</xf:label>
+				<p>Tab 3 content</p>
+			</xf:case>
+		</xf:switch>
+
+  	</xf:case>
+
+	<xf:case id="select1">
+		<xf:label>Select1</xf:label>
+
+  <xf:select1 ref="/data/sel1" appearance="minimal">
+  	<xf:label>Minimal Select1</xf:label>
+      <xf:item>
+        <xf:label>One</xf:label>
+        <xf:value>One</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Two</xf:label>
+        <xf:value>Two</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Three</xf:label>
+        <xf:value>Three</xf:value>
+      </xf:item>
+  </xf:select1>
+
+  <xf:select1 ref="/data/sel1" appearance="compact">
+  	<xf:label>Compact Select1</xf:label>
+      <xf:item>
+        <xf:label>One</xf:label>
+        <xf:value>One</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Two</xf:label>
+        <xf:value>Two</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Three</xf:label>
+        <xf:value>Three</xf:value>
+      </xf:item>
+  </xf:select1>
+
+  <xf:select1 ref="/data/sel1" appearance="full">
+  	<xf:label>Full Select1</xf:label>
+      <xf:item>
+        <xf:label>One</xf:label>
+        <xf:value>One</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Two</xf:label>
+        <xf:value>Two</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Three</xf:label>
+        <xf:value>Three</xf:value>
+      </xf:item>
+  </xf:select1>
+
+  <xf:select1 ref="/data/sel1" appearance="tabs">
+  	<xf:label>Tabs Select1</xf:label>
+  	<xf:choices> <!-- We use choices element here just to see that it does not cause a bug -->
+  	             <!-- Choices element is not really supported though, they are just ignored -->
+      <xf:item>
+        <xf:label>One</xf:label>
+        <xf:value>One</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Two</xf:label>
+        <xf:value>Two</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Three</xf:label>
+        <xf:value>Three</xf:value>
+      </xf:item>
+    </xf:choices>
+  </xf:select1>
+
+	</xf:case>
+
+	<xf:case id="select">
+		<xf:label>Select</xf:label>
+
+  <xf:select ref="/data/sel" appearance="minimal">
+  	<xf:label>Minimal/Compact Select</xf:label>
+      <xf:item>
+        <xf:label>One</xf:label>
+        <xf:value>One</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Two</xf:label>
+        <xf:value>Two</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Three</xf:label>
+        <xf:value>Three</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Four</xf:label>
+        <xf:value>Four</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Five</xf:label>
+        <xf:value>Five</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Six</xf:label>
+        <xf:value>Six</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Seven</xf:label>
+        <xf:value>Seven</xf:value>
+      </xf:item>
+  </xf:select>
+
+  <xf:select ref="/data/sel" appearance="full">
+  	<xf:label>Full Select</xf:label>
+      <xf:item>
+        <xf:label>One</xf:label>
+        <xf:value>One</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Two</xf:label>
+        <xf:value>Two</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Three</xf:label>
+        <xf:value>Three</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Four</xf:label>
+        <xf:value>Four</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Five</xf:label>
+        <xf:value>Five</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Six</xf:label>
+        <xf:value>Six</xf:value>
+      </xf:item>
+      <xf:item>
+        <xf:label>Seven</xf:label>
+        <xf:value>Seven</xf:value>
+      </xf:item>
+  </xf:select>
+
+	</xf:case>
+
+
+	<xf:case id="table">
+		<xf:label>Table</xf:label>
+	        <xf:switch>
+	        <xf:case id="view">
+
+			<xf:select1 ref="dTableFilter" appearance="minimal">
+			<xf:label>Filter with max price</xf:label>
+					<xf:item>
+						<xf:label>10</xf:label>
+						<xf:value>10</xf:value>
+					</xf:item>
+					<xf:item>
+						<xf:label>20</xf:label>
+						<xf:value>20</xf:value>
+					</xf:item>
+					<xf:item>
+						<xf:label>30</xf:label>
+						<xf:value>30</xf:value>
+					</xf:item>
+					<xf:item>
+						<xf:label>40</xf:label>
+						<xf:value>40</xf:value>
+					</xf:item>
+					<xf:item>
+						<xf:label>50</xf:label>
+						<xf:value>50</xf:value>
+					</xf:item>
+					<xf:item>
+						<xf:label>None</xf:label>
+						<xf:value>1000000</xf:value>
+					</xf:item>
+			</xf:select1>
+						
+<!--
+			<xf:output ref="dTableRepeatIndex">
+				<xf:label value="concat('RepeatIndex (out of ',count(instance('document')/dTable/row), ')')"/>
+			</xf:output>
+-->
+
+			<table id="mytable" appearance="selectable">
+			   <caption>Product Catalog</caption>
+			  
+			  <!--
+			  	Dependency calculation does not work with repeat index, so we need this workaround
+			    if we want to adjust dynamically to the selection (e.g. to show some more details on selected item).
+			    At the moment it is not needed.
+			  -->
+<!--
+			   <xf:action ev:event="xforms-select">
+			   		<xf:setvalue ref="dTableRepeatIndex" value="index('trepeat')"/>
+			   </xf:action>
+-->			   
+			    
+			   <thead>
+				   <tr>
+				   		<th>Name</th><th>Price</th><th>Lot size</th>
+				   		<th>Code</th><th>Producer</th><th>Quality</th>
+				   </tr>
+				</thead>
+			
+				<tbody id="trepeat" repeat-nodeset="dTable/row[price &lt;= instance('document')/dTableFilter]">
+					<tr>
+						<td><xf:output ref="name"/></td>
+						<td><xf:output ref="price"/></td>
+						<td><xf:output ref="quantity"/></td>
+						<td><xf:output ref="code"/></td>
+
+						<td><xf:output ref="country"/></td>
+						<td><xf:output ref="quality"/></td>
+
+					</tr>
+				</tbody>
+			</table>
+			<table appearance="layout">				
+			<tr><td>
+			  <xf:trigger>
+				<xf:label>Add Before</xf:label>
+				<xf:action ev:event="DOMActivate">
+					<xf:insert
+						origin="instance('template')/row"
+						context="instance('document')/dTable"
+						nodeset="row"
+						at="index('trepeat')"
+						position="before"
+						/>
+				</xf:action>
+			  </xf:trigger>
+			  </td>
+			  <td>
+			  <xf:trigger>
+				<xf:label>Add After</xf:label>
+				<xf:action ev:event="DOMActivate">
+					<xf:insert
+						origin="instance('template')/row"
+						context="instance('document')/dTable"
+						nodeset="row"
+						at="index('trepeat')"
+						position="after"
+						/>
+				</xf:action>
+			  </xf:trigger>
+			  </td>
+			  </tr>
+			  <tr>
+			  <td>
+			<xf:trigger id="editbutton">
+				<xf:label>Edit</xf:label>
+				<xf:action ev:event="DOMActivate">
+					<xf:setvalue ref="dTableEditIndex" value="index('trepeat')"/>
+					<xf:toggle case="edit"/>
+					<xf:setfocus control="editstart"/>
+				</xf:action>
+			</xf:trigger>
+			</td>
+			<td>
+			<xf:trigger>
+				<xf:label>Delete</xf:label>
+				<xf:action ev:event="DOMActivate">
+					<xf:delete context="instance('document')/dTable" nodeset="row" at="index('trepeat')"/>
+				</xf:action>
+			</xf:trigger>
+			</td>
+			</tr>
+			</table>
+
+
+		</xf:case>
+		<xf:case id="edit">
+		<xf:group ref="dTable/row[number(instance('document')/dTableEditIndex)]">
+			<xf:input id="editstart" ref="name">
+				<xf:label>Name</xf:label>
+			</xf:input>
+			<xf:input ref="price">
+				<xf:label>Price</xf:label>
+			</xf:input>
+			<xf:input ref="quantity">
+				<xf:label>Lot Size</xf:label>
+			</xf:input>
+			<xf:input ref="code">
+				<xf:label>Code</xf:label>
+			</xf:input>
+			<xf:select1 ref="country" appearance="compact">
+				<xf:label>Producer</xf:label>
+					<xf:item>
+						<xf:label>Great Britain</xf:label>
+						<xf:value>GB</xf:value>
+					</xf:item>
+					<xf:item>
+						<xf:label>Finland</xf:label>
+						<xf:value>FI</xf:value>
+					</xf:item>
+					<xf:item>
+						<xf:label>United States</xf:label>
+						<xf:value>US</xf:value>
+					</xf:item>
+					<xf:item>
+						<xf:label>Sweden</xf:label>
+						<xf:value>SWE</xf:value>
+					</xf:item>
+			</xf:select1>
+			<xf:select1 ref="quality" appearance="compact">
+				<xf:label>Quality</xf:label>
+					<xf:item>
+						<xf:label>Poor</xf:label>
+						<xf:value>poor</xf:value>
+					</xf:item>
+					<xf:item>
+						<xf:label>Average</xf:label>
+						<xf:value>avg</xf:value>
+					</xf:item>
+					<xf:item>
+						<xf:label>Good</xf:label>
+						<xf:value>good</xf:value>
+					</xf:item>
+					<xf:item>
+						<xf:label>Fine</xf:label>
+						<xf:value>fine</xf:value>
+					</xf:item>
+			</xf:select1>
+			<xf:trigger>
+				<xf:label>Done</xf:label>
+				<xf:action ev:event="DOMActivate">
+					<xf:toggle case="view"/>
+					<xf:setfocus control="editbutton"/>
+				</xf:action>
+			</xf:trigger>
+		</xf:group>
+		</xf:case>
+		</xf:switch>
+
+		</xf:case>
+
+  	<xf:case id="date">
+  		<xf:label>Date</xf:label>
+			<xf:input ref="date">
+				<xf:label>Date input</xf:label>
+			</xf:input>
+			<xf:input ref="time">
+				<xf:label>Time input</xf:label>
+			</xf:input>
+			<xf:input ref="datetime">
+				<xf:label>DateTime input</xf:label>
+			</xf:input>
+			<xf:output ref="date">
+				<xf:label>Date as string</xf:label>
+			</xf:output>
+			<xf:output ref="time">
+				<xf:label>Time as string</xf:label>
+			</xf:output>
+			<xf:output ref="datetime">
+				<xf:label>DateTime as string</xf:label>
+			</xf:output>
+  	</xf:case>
+
+  	<xf:case id="password">
+  		<xf:label>Password</xf:label>
+			<xf:secret ref="pw">
+				<xf:label>Password Input</xf:label>
+			</xf:secret>
+			<xf:output ref="pw">
+				<xf:label>Password in cleartext</xf:label>
+			</xf:output>
+			<p>(Cleartext updates only after focus moves away from input)</p>
+  	</xf:case>
+
+  	<xf:case id="required">
+  		<xf:label>Required</xf:label>
+  			<xf:input ref="reqflag">
+				<xf:label>Required flag</xf:label>
+			</xf:input>
+			<xf:input ref="req">
+				<xf:label>Required field</xf:label>
+			</xf:input>
+			<xf:input ref="notreq">
+				<xf:label>Normal field</xf:label>
+			</xf:input>
+			<xf:submit submission="sub1">
+				<xf:label>Submit Now</xf:label>
+			</xf:submit>
+  	</xf:case>
+  	
+  	<xf:case id="readonly">
+  		<xf:label>Read-Only</xf:label>
+  			<xf:input ref="roflag">
+				<xf:label>Read-only flag</xf:label>
+			</xf:input>
+			<xf:input ref="ro">
+				<xf:label>Read-only field</xf:label>
+			</xf:input>
+			<xf:input ref="notro">
+				<xf:label>Normal field</xf:label>
+			</xf:input>
+  	</xf:case>
+
+  	<xf:case id="relevant">
+  		<xf:label>Relevant</xf:label>
+  			<xf:input ref="relflag">
+				<xf:label>Relevant flag</xf:label>
+			</xf:input>
+			<xf:input ref="rel">
+				<xf:label>Relevant field</xf:label>
+			</xf:input>
+			<xf:input ref="notrel">
+				<xf:label>Normal field</xf:label>
+			</xf:input>
+  	</xf:case>
+  
+   	<xf:case id="constraint">
+  		<xf:label>Constraint</xf:label>
+  			<xf:input ref="conflag">
+				<xf:label>Constraint flag</xf:label>
+			</xf:input>
+			<xf:input ref="con">
+				<xf:label>Constraint field (&lt; 100 &amp; multiple of 10)</xf:label>
+				<xf:alert value="if(. < 100,'','Value must be less than 100!')"/>
+				<xf:alert value="if(. mod 10 = 0,'','Value must be a multiple of 10!')"/>
+			</xf:input>
+			<xf:input ref="reqcon">
+				<xf:label>Required constraint field (&lt; 100 &amp; multiple of 10)</xf:label>
+				<xf:alert value="if(. < 100,'','Value must be less than 100!')"/>
+				<xf:alert value="if(. mod 10 = 0,'','Value must be a multiple of 10!')"/>
+			</xf:input>
+			<xf:input ref="notcon">
+				<xf:label>Normal field</xf:label>
+			</xf:input>
+			<xf:output ref="reqcon">
+				<xf:label>No alerts in output</xf:label>
+			</xf:output>
+  	</xf:case>
+  
+  </xf:switch>
+
+</body>
+</html>

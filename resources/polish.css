@@ -1,0 +1,276 @@
+/** 
+  * The polish.css files contains all
+  * design information about a project.
+  * It can be adjusted for specific devices
+  * or device groups by putting it in the 
+  * appropriate sub-folder.
+  * If you want to adjust a design for all
+  * Nokia devices, define it in "resources/Nokia/polish.css"
+  * and so on. Only new and different settings
+  * need to be specified in such polish.css files. 
+  */
+
+/**
+  * the colors which are defined in
+  * the colors section can later be referenced.
+  * This makes changes easy, since the color
+  * just needs to be changed in one position.
+  * Even default colors (like blue, green, lime, etc)
+  * can be changed here. 
+  */
+
+
+colors {
+	screenColorTop1: #fff;
+	screenColorBottom1: #fff;
+	screenColorTop2: #ff0;
+	screenColorBottom2: #ff0;
+	bgColor:  white;
+	contextBgColor: #aff;
+	focusedBgColor:  #bbf;
+	focusedBgColor2: #ddf;
+	rangeBarColor:  #66f;
+	fontColor: #222;
+	fontShadowColor: #fff;
+	focusedFontColor: #111;
+	
+	focusedBackgroundColor: #63c931;
+	/* focusedBackgroundColor: #eee; */
+	focusedBorderColor: #444;
+	
+	titleBackgroundColor: #4f4f34;
+}
+
+//#include ${dir.include}/xforms.css
+
+
+/**
+ * Default style for labels.
+ * Set an explicit style with "label-style: name;" in the appropriate style.
+ */
+ 
+/**
+ * Default style for labels.
+ * Set an explicit style with "label-style: name;" in the appropriate style.
+ */
+label {
+	font-color: blue;
+	font-size: small;
+	margin: 2;
+	margin-left: 5;
+	layout: left | newline-after;
+} 
+
+/**
+  * You could style the screen info element here, which is used to display information
+  * over several screens. Since we use only two images, however, this style is not
+  * really needed.
+  */
+screeninfo {
+	font-size: small;
+	margin-top: -24;
+	margin-left: 10;
+}
+
+/**
+  * The element that displays the current input mode, e.g. "abc" or "Abc" or "123"
+  */
+info {
+	font-size: small;
+	layout: right|shrink;
+	margin-right: 10;
+	margin-top: -24;
+	background-color: argb( 170, 255, 255, 255 );
+}
+
+
+
+/*************   SCROLL BAR   *************/
+scrollbar {
+	scrollbar-slider-color: focusedBackgroundColor;
+	scrollbar-slider-width: 3;
+}
+
+/**
+  * The title style is a predefined style which is used
+  * for all screen-titles.
+  */
+title {
+	padding: 2;
+	font-face: proportional;
+	font-size: small;
+	font-style: bold;
+	font-color: white;
+	
+	background-color:  titleBackgroundColor;
+	/*
+	background {
+		type: vertical-gradient;
+		top-color: #fff;
+		bottom-color: #ccc;
+		start: 2%;
+		end: 90%;
+	}
+	*/
+	border: none;
+	layout: horizontal-center | horizontal-expand;
+	/*
+	text-effect: vertical-gradient;
+	text-vertical-gradient-start-color: #eee;
+	text-vertical-gradient-end-color: #000;		
+	*/
+	text-effect: shadow;
+	text-shadow-color: gray;
+}
+
+/*************   MENU BAR     *************/
+
+menubar
+{
+	font-color:white;
+	margin: 0;
+/*	padding-top: 3; */
+	padding: 2;
+	background {
+/*		type: vertical-gradient;
+		top-color: #ccc;
+		bottom-color: #fff;
+		start: 10%;
+		end: 90%;
+		*/
+		color: titleBackgroundColor;
+	}
+}
+
+/**
+ * Commands within the menubar on the left side
+ */
+leftcommand
+{
+	margin: 0;
+/*    margin-left: 10;
+    margin-right: 10; */
+    margin-left: 3;
+    margin-right: 3;
+/*	padding-top: 3; */
+    padding-top: 0;
+	padding-bottom: 0;
+	font-color: white;
+	font-style: bold;
+	font-size: small;
+
+}
+
+/**
+ * Commands within the menubar on the right side
+ */
+rightcommand extends leftcommand
+{
+	layout: right;
+}
+centercommand extends leftcommand 
+{
+	layout: center;
+}
+
+menu {
+	margin-left: 4;
+	margin-right: 4;
+	margin-bottom: -4;
+	min-width: 100;
+	padding: 2;
+	font-color: EagleDarkGrey;
+	font-size: small;
+	/* view-type: slide-up; */
+	border {
+		type: drop-shadow;
+		width: 4;
+		inner-color: EagleWhite;
+		outer-color: titleBackgroundColor;
+		orientation: top-right;
+	}
+	background {
+		color: EagleWhite;
+	}
+	/*
+	background {
+		type: round-rect;
+		color: focusedBgColor;
+		border-width: 2;
+		border-color: bgColor;
+	}
+	*/
+	/* When the extended menubar is not used, the font-section will
+	   apply to the menubar as well:
+	font-color: fontColor;
+	font-style: bold;
+	menubar-color: yellow;
+	 */
+}
+
+
+/** Style for the first layer of subcommands.
+menu1 extends menu {
+	background-color: argb(75%, 100%, 100%, 0 );
+	background-type: simple;
+	background-border-width: 0;
+    layout: right;
+    margin-bottom: 4;
+    margin-right: 4;
+}
+ */
+
+
+/**
+  * The menuItem style is a predefined style
+  * for the actual commands in a fullscreen-menu.
+  * When the menuItem style is not defined,
+  * the menu style will be used instead. 
+  */
+menuItem {
+	padding: 3;
+	padding-left: 10;
+	padding-right: 10;
+	font {
+		color: black;
+		size: small;
+		style: bold;
+	}
+	background: none;
+	layout: left;
+	/**
+	 * Yes, it's possible to use preprocessing within CSS files. Use any preprocessing
+	 * variables like polish.midp2 or polish.api.nokia-ui. You can also access resource
+	 * information using these property functions:
+	 * - exists( resourcename ): checks whether a resource is defined for the current target device
+	 * - imagewidth( imagename ): retrieves the width of the given image
+	 * - imageheight( imagename ): retrieves the height of the given image
+	 */
+
+	//#if ${ exists( arrowRight.png ) }
+		command-child-indicator: url(arrowRight.png);
+	//#else
+		command-child-indicator-color: white;
+		command-child-indicator-width: 8;
+		command-child-indicator-height: 10;
+	//#endif
+}
+
+/**
+  * This is a custom style for selected
+  * menu items. It is used, because it has
+  * been defined in the menu style. 
+  */
+menuItem:hover extends menuItem {
+	background: EagleFocusedBg;
+	font-color: black;
+	layout: left | horizontal-expand;
+}
+
+/*
+focused {
+	background-color: focusedBgColor;
+}
+*/
+
+

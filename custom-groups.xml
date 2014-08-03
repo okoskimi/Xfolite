@@ -1,0 +1,12 @@
+<groups>
+	<group>
+		<name>Series40E5FP1Lite</name>
+		<parent>Series40E5</parent>
+		<capability name="ScreenSize" value="128x160" />
+		<capability name="FullCanvasSize" value="128x160" />
+		<capability name="Emulator.Skin" value="S40_5th_Edition_SDK_Feature_Pack_1_Lite" />
+		<capability name="JavaPlatform" value="MIDP/2.1" />
+		<capability name="JavaConfiguration" value="CLDC/1.1" />
+		<capability name="JavaPackage" value="mmapi, wmapi, btapi, pdaapi, m3gapi" />
+	</group>
+</groups>
